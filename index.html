@@ -251,6 +251,7 @@ footer b{color:#241F1A}
       <button class="add" id="btAdd">Adicionar</button>
     </div>
     <div class="aviso" id="dAviso"></div>
+    <div class="aviso" style="margin-top:2px">Em AR: aponte para a mesa e mova o telemóvel devagar até o prato assentar.</div>
   </div>
 </div>
 
@@ -412,7 +413,8 @@ function abrir(p){
   document.getElementById('dAviso').textContent = '';
   const bt = document.getElementById('btAr'); bt.disabled = true;
   palco.innerHTML = `<model-viewer id="mv" src="${p.m}" alt="${p.n}" ar
-    ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" camera-controls touch-action="none"
+    ar-modes="scene-viewer webxr quick-look" ar-scale="fixed" ar-placement="floor"
+    camera-controls touch-action="none" min-field-of-view="25deg"
     shadow-intensity="1" environment-image="neutral" exposure="1.15"
     camera-orbit="18deg 66deg auto" poster="${p.f}"></model-viewer>`;
   mv = document.getElementById('mv');

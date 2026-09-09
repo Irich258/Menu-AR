@@ -1,24 +1,22 @@
-MENU DIGITAL 3D/AR — V3 FOOD   (modelos íntegros)
-=================================================
+MENU DIGITAL 3D/AR — V3 FOOD   (textura em resolução original)
+==============================================================
 
-O QUE FOI FEITO AOS MODELOS
-  Nada foi recortado nem alterado. A captura do KIRI está inteira, com a
-  toalha e a mesa tal como foram digitalizadas.
+O QUE MUDOU NESTA VERSÃO
+  A textura voltou aos 4096 originais. Na versão anterior estava em 2048
+  e via-se desfocada de perto. Para compensar o peso, a geometria foi
+  simplificada um pouco mais — não se nota, porque a nitidez de um prato
+  vem da textura, não do número de triângulos.
 
-  Só duas coisas mudaram:
+        frango.glb       575 KB
+        prato-casa.glb   1,17 MB
+        tabua.glb        652 KB
 
-  1. ESCALA. Os ficheiros vinham com 1,7 x 1,9 metros. Em AR isso punha um
-     prato de quase dois metros sobre a mesa. Medi o prato dentro de cada
-     captura e ajustei para que ele fique com 30 cm reais. O resto da
-     captura acompanhou na mesma proporção.
+  Também foi acrescentado ar-placement="floor", que diz ao telemóvel para
+  procurar uma superfície horizontal em vez de uma parede.
 
-  2. PESO. Os três somavam 76 MB e demoravam a abrir. Agora somam 1,8 MB.
-     Textura em WebP a 2048 e geometria simplificada com margem de erro
-     muito baixa, para a aparência não mudar.
-
-        frango.glb        13,6 MB  ->  417 KB
-        prato-casa.glb    33,1 MB  ->  887 KB
-        tabua.glb         28,9 MB  ->  522 KB
+CONTINUA SEM CORTES
+  A captura do KIRI está inteira, com a toalha. Só a escala foi corrigida:
+  o prato tem 30 cm reais.
 
 OS 8 FICHEIROS (todos no mesmo nível, sem subpastas)
   index.html
@@ -27,16 +25,19 @@ OS 8 FICHEIROS (todos no mesmo nível, sem subpastas)
   prato-casa.glb    prato-casa.webp
   tabua.glb         tabua.webp
 
-PUBLICAR
-  GitHub: Add file > Upload files > arrastar os FICHEIROS (não a pasta) >
-          Commit changes > Settings > Pages > main > /(root) > Save.
-  Netlify: netlify.com/drop > arrastar a PASTA. Sem conta, 30 segundos.
+ATUALIZAR NO GITHUB
+  Add file > Upload files > arrastar os FICHEIROS > Commit changes.
+  Os nomes são os mesmos, por isso o GitHub substitui os antigos.
+  Espere 1-2 minutos e recarregue a página no telemóvel.
 
-  O AR só funciona num endereço https://. Abrir o ficheiro localmente ou
-  pelo WhatsApp nunca vai funcionar.
-
-SE ALGUM FICHEIRO FALTAR
-  O menu mostra uma barra vermelha em baixo a dizer qual. Tire print.
+COMO O AR ASSENTA MELHOR (é do telemóvel, não do ficheiro)
+  - Aponte à mesa e mova o telemóvel devagar, em arco, 3-4 segundos antes
+    de tocar. O telemóvel precisa de ver a superfície de vários ângulos.
+  - Superfícies com padrão ou textura funcionam muito melhor que uma
+    toalha branca lisa. Mesa de madeira é ideal.
+  - Luz forte e uniforme. Com pouca luz o prato treme.
+  - Não fique demasiado perto: 40-60 cm da mesa.
+  - Android precisa dos "Serviços do Google Play para RA" atualizados.
 
 PRATOS
   Frango na Chapa    780 MT   mais vendido

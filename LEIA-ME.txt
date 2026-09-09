@@ -1,49 +1,44 @@
-MENU DIGITAL 3D/AR — V3 FOOD  (versão plana, sem pastas)
-========================================================
+MENU DIGITAL 3D/AR — V3 FOOD   (modelos íntegros)
+=================================================
 
-PORQUE ESTA VERSÃO É DIFERENTE
-  A versão anterior tinha pastas (models/ e poster/). Se o upload no GitHub
-  não preservar as pastas, os ficheiros deixam de ser encontrados e o menu
-  aparece sem imagens e sem 3D — foi o que aconteceu.
+O QUE FOI FEITO AOS MODELOS
+  Nada foi recortado nem alterado. A captura do KIRI está inteira, com a
+  toalha e a mesa tal como foram digitalizadas.
 
-  Aqui está TUDO no mesmo nível. Não há pastas nenhumas. Basta que os
-  8 ficheiros fiquem lado a lado.
+  Só duas coisas mudaram:
 
-OS 8 FICHEIROS (todos na raiz do repositório)
+  1. ESCALA. Os ficheiros vinham com 1,7 x 1,9 metros. Em AR isso punha um
+     prato de quase dois metros sobre a mesa. Medi o prato dentro de cada
+     captura e ajustei para que ele fique com 30 cm reais. O resto da
+     captura acompanhou na mesma proporção.
+
+  2. PESO. Os três somavam 76 MB e demoravam a abrir. Agora somam 1,8 MB.
+     Textura em WebP a 2048 e geometria simplificada com margem de erro
+     muito baixa, para a aparência não mudar.
+
+        frango.glb        13,6 MB  ->  417 KB
+        prato-casa.glb    33,1 MB  ->  887 KB
+        tabua.glb         28,9 MB  ->  522 KB
+
+OS 8 FICHEIROS (todos no mesmo nível, sem subpastas)
   index.html
   model-viewer.min.js
-  frango.glb        prato-casa.glb        tabua.glb
-  frango.webp       prato-casa.webp       tabua.webp
+  frango.glb        frango.webp
+  prato-casa.glb    prato-casa.webp
+  tabua.glb         tabua.webp
 
-COMO PUBLICAR
-  1. Extraia este ZIP no computador.
-  2. No repositório: Add file > Upload files.
-  3. Selecione os 8 ficheiros (Ctrl+A dentro da pasta extraída) e arraste.
-     NÃO arraste a pasta. NÃO faça upload do ZIP.
-  4. Commit changes.
-  5. Settings > Pages > Deploy from a branch > main > /(root) > Save.
-  6. Aguarde 1-2 minutos e abra o endereço NO TELEMÓVEL.
+PUBLICAR
+  GitHub: Add file > Upload files > arrastar os FICHEIROS (não a pasta) >
+          Commit changes > Settings > Pages > main > /(root) > Save.
+  Netlify: netlify.com/drop > arrastar a PASTA. Sem conta, 30 segundos.
 
-SE ALGO FALTAR, O MENU AVISA
-  Foi acrescentado um verificador. Se algum dos 8 ficheiros não estiver no
-  servidor, aparece uma barra vermelha em baixo a dizer exatamente qual.
-  Se essa barra aparecer, tire print e mande — resolve-se em minutos.
+  O AR só funciona num endereço https://. Abrir o ficheiro localmente ou
+  pelo WhatsApp nunca vai funcionar.
 
-TRÊS COISAS QUE IMPEDEM O AR DE FUNCIONAR
-  1. Abrir o index.html com duplo clique no computador (endereço file://).
-     O 3D não carrega assim. Tem mesmo de estar publicado num site.
-  2. Abrir sem HTTPS. O GitHub Pages já dá HTTPS — use o endereço
-     https://<utilizador>.github.io/<repositorio>/
-  3. Telemóvel sem suporte de AR. Nesse caso o 3D roda na mesma e o menu
-     avisa por baixo do botão. Em Android é preciso ter os "Serviços do
-     Google Play para RA" instalados.
+SE ALGUM FICHEIRO FALTAR
+  O menu mostra uma barra vermelha em baixo a dizer qual. Tire print.
 
-VERIFICAÇÃO RÁPIDA
-  Abra no telemóvel: https://<utilizador>.github.io/<repositorio>/frango.webp
-  - Se aparecer a fotografia do frango, os ficheiros estão bem colocados.
-  - Se der 404, os ficheiros não estão na raiz.
-
-PRATOS EM 3D
+PRATOS
   Frango na Chapa    780 MT   mais vendido
   Prato da Casa      950 MT   recomendado
   Tábua de Petiscos  650 MT   promoção (antes 800)

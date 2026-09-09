@@ -413,9 +413,10 @@ function abrir(p){
   document.getElementById('dAviso').textContent = '';
   const bt = document.getElementById('btAr'); bt.disabled = true;
   palco.innerHTML = `<model-viewer id="mv" src="${p.m}" alt="${p.n}" ar
-    ar-modes="scene-viewer webxr quick-look" ar-scale="fixed" ar-placement="floor"
+    ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" ar-placement="floor"
+    xr-environment
     camera-controls touch-action="none" min-field-of-view="25deg"
-    shadow-intensity="1" environment-image="neutral" exposure="1.15"
+    shadow-intensity="1" shadow-softness="0.85" environment-image="neutral" exposure="1.15" tone-mapping="neutral"
     camera-orbit="18deg 66deg auto" poster="${p.f}"></model-viewer>`;
   mv = document.getElementById('mv');
   mv.addEventListener('load', () => {

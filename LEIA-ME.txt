@@ -1,0 +1,57 @@
+MENU DIGITAL 3D/AR — V3 FOOD  (versão plana, sem pastas)
+========================================================
+
+PORQUE ESTA VERSÃO É DIFERENTE
+  A versão anterior tinha pastas (models/ e poster/). Se o upload no GitHub
+  não preservar as pastas, os ficheiros deixam de ser encontrados e o menu
+  aparece sem imagens e sem 3D — foi o que aconteceu.
+
+  Aqui está TUDO no mesmo nível. Não há pastas nenhumas. Basta que os
+  8 ficheiros fiquem lado a lado.
+
+OS 8 FICHEIROS (todos na raiz do repositório)
+  index.html
+  model-viewer.min.js
+  frango.glb        prato-casa.glb        tabua.glb
+  frango.webp       prato-casa.webp       tabua.webp
+
+COMO PUBLICAR
+  1. Extraia este ZIP no computador.
+  2. No repositório: Add file > Upload files.
+  3. Selecione os 8 ficheiros (Ctrl+A dentro da pasta extraída) e arraste.
+     NÃO arraste a pasta. NÃO faça upload do ZIP.
+  4. Commit changes.
+  5. Settings > Pages > Deploy from a branch > main > /(root) > Save.
+  6. Aguarde 1-2 minutos e abra o endereço NO TELEMÓVEL.
+
+SE ALGO FALTAR, O MENU AVISA
+  Foi acrescentado um verificador. Se algum dos 8 ficheiros não estiver no
+  servidor, aparece uma barra vermelha em baixo a dizer exatamente qual.
+  Se essa barra aparecer, tire print e mande — resolve-se em minutos.
+
+TRÊS COISAS QUE IMPEDEM O AR DE FUNCIONAR
+  1. Abrir o index.html com duplo clique no computador (endereço file://).
+     O 3D não carrega assim. Tem mesmo de estar publicado num site.
+  2. Abrir sem HTTPS. O GitHub Pages já dá HTTPS — use o endereço
+     https://<utilizador>.github.io/<repositorio>/
+  3. Telemóvel sem suporte de AR. Nesse caso o 3D roda na mesma e o menu
+     avisa por baixo do botão. Em Android é preciso ter os "Serviços do
+     Google Play para RA" instalados.
+
+VERIFICAÇÃO RÁPIDA
+  Abra no telemóvel: https://<utilizador>.github.io/<repositorio>/frango.webp
+  - Se aparecer a fotografia do frango, os ficheiros estão bem colocados.
+  - Se der 404, os ficheiros não estão na raiz.
+
+PRATOS EM 3D
+  Frango na Chapa    780 MT   mais vendido
+  Prato da Casa      950 MT   recomendado
+  Tábua de Petiscos  650 MT   promoção (antes 800)
+
+PERSONALIZAR
+  No index.html, bloco CONFIGURAÇÃO:
+     const CASA     = "Casa do Índico";
+     const TAGLINE  = "grelhados & petiscos";
+     const WHATSAPP = "258840000000";
+
+Grupo V3 · Vértice Solutions

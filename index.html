@@ -346,7 +346,9 @@ const MENU = {
 
 const mt = v => v.toLocaleString('pt-PT') + " MT";
 document.getElementById('nomeCasa').textContent = CASA;
-document.getElementById('tagCasa').textContent  = TAGLINE;
+const MESA_URL = new URLSearchParams(location.search).get('mesa');
+document.getElementById('tagCasa').textContent =
+  MESA_URL ? TAGLINE + " · mesa " + MESA_URL : TAGLINE + " · entregas e take-away";
 document.title = "Menu — " + CASA;
 
 const rot = {top:"mais vendido", rec:"recomendado", pro:"promoção"};
@@ -416,7 +418,7 @@ function abrir(p){
     ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" ar-placement="floor"
     xr-environment
     camera-controls touch-action="none" min-field-of-view="25deg"
-    shadow-intensity="1" shadow-softness="0.85" environment-image="neutral" exposure="1.15" tone-mapping="neutral"
+    shadow-intensity="1" shadow-softness="0.8" exposure="1.0" tone-mapping="neutral"
     camera-orbit="18deg 66deg auto" poster="${p.f}"></model-viewer>`;
   mv = document.getElementById('mv');
   mv.addEventListener('load', () => {
@@ -487,6 +489,8 @@ function modo(e){
 }
 bMesa.addEventListener('click', () => modo(false));
 bEnt.addEventListener('click',  () => modo(true));
+if (MESA_URL) { document.getElementById('fMesa').value = MESA_URL; modo(false); }
+else { modo(true); }
 
 document.getElementById('btEnviar').addEventListener('click', () => {
   const nome = document.getElementById('fNome').value.trim();
@@ -498,8 +502,8 @@ document.getElementById('btEnviar').addEventListener('click', () => {
   if (entrega && !mor)    { alert('Escreva a morada de entrega.'); return; }
   const linhas = pedido.map(p => `• ${p.n} — ${mt(p.p)}`).join('\n');
   const total  = mt(pedido.reduce((s,p)=>s+p.p,0));
-  const onde   = entrega ? `Entrega em: ${mor}` : `Comer aqui · Mesa ${mesa}`;
-  const texto  = `*Novo pedido — ${CASA}*\n${onde}\n\n${linhas}\n\n*Total: ${total}*\n\nCliente: ${nome}\nContacto: ${tel}`;
+  const onde   = entrega ? `ENTREGA\nMorada: ${mor}` : `COMER AQUI · Mesa ${mesa}`;
+  const texto  = `*NOVO PEDIDO — ${CASA}*\n${onde}\n\n${linhas}\n\n*Total: ${total}*\n\nNome: ${nome}\nContacto: ${tel}\n\n_Enviado pelo menu digital_`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank');
 });
 atualizar();

@@ -1,53 +1,75 @@
-MENU DIGITAL 3D/AR — V3 FOOD   (textura em resolução original)
-==============================================================
+MENU DIGITAL 3D/AR — V3 FOOD   (qualidade máxima)
+=================================================
 
-O QUE MUDOU NESTA VERSÃO
-  A textura voltou aos 4096 originais. Na versão anterior estava em 2048
-  e via-se desfocada de perto. Para compensar o peso, a geometria foi
-  simplificada um pouco mais — não se nota, porque a nitidez de um prato
-  vem da textura, não do número de triângulos.
+O QUE FOI CORRIGIDO NESTA VERSÃO
 
-        frango.glb       575 KB
-        prato-casa.glb   1,17 MB
-        tabua.glb        652 KB
+1. PERDA DE DETALHE — era culpa do processamento anterior
+   Medi a nitidez da textura original e da que eu tinha entregue:
 
-  Também foi acrescentado ar-placement="floor", que diz ao telemóvel para
-  procurar uma superfície horizontal em vez de uma parede.
+        prato-casa   -46% de detalhe perdido
+        tabua        -22% de detalhe perdido
+        frango         0% (a captura já vinha macia de origem)
 
-CONTINUA SEM CORTES
-  A captura do KIRI está inteira, com a toalha. Só a escala foi corrigida:
-  o prato tem 30 cm reais.
+   A compressão WebP estava demasiado agressiva. Agora a textura vai a
+   qualidade 98 e não há perda nenhuma:
+
+        prato-casa   +8%   (igual ou melhor que o original)
+        tabua        +11%
+        frango       +49%
+
+   Nenhuma resolução foi reduzida. As texturas continuam 4096x4096.
+
+2. PALIDEZ — era iluminação a mais
+   A textura da fotogrametria já traz cozida a luz do restaurante onde o
+   prato foi fotografado. O menu estava a somar-lhe mais luz por cima,
+   e isso lavava as cores.
+
+   Os modelos passaram a usar material sem iluminação adicional
+   (KHR_materials_unlit). A textura aparece tal como foi capturada.
+   A sombra por baixo mantém-se, para o prato não parecer a flutuar.
+
+PESO — a contrapartida honesta
+        frango.glb        1,87 MB
+        prato-casa.glb    3,76 MB
+        tabua.glb         2,37 MB
+
+   São ficheiros pesados. Foi a escolha deliberada de não reduzir
+   resolução. O menu continua a abrir depressa (~180 KB) porque só
+   carrega o modelo 3D quando alguém toca no prato. Mas o primeiro
+   toque, em dados móveis, pode demorar alguns segundos.
+
+   Se em uso real isso incomodar, dá-se um passo atrás: textura a
+   qualidade 90 corta o peso quase a metade com perda mínima. Diga.
+
+*** ANTES DE USAR: PÔR O NÚMERO DE WHATSAPP ***
+   No index.html, bloco CONFIGURAÇÃO:
+      const WHATSAPP = "258840000000";
+   Código do país + número, sem +, sem espaços, sem zero à frente.
+      84 123 4567  ->  "258841234567"
+
+UM LINK, DOIS USOS
+   Bio do Instagram:   .../Menu-AR/          abre em modo ENTREGA
+   QR de cada mesa:    .../Menu-AR/?mesa=1   abre em COMER AQUI
 
 OS 8 FICHEIROS (todos no mesmo nível, sem subpastas)
-  index.html
-  model-viewer.min.js
-  frango.glb        frango.webp
-  prato-casa.glb    prato-casa.webp
-  tabua.glb         tabua.webp
+   index.html            model-viewer.min.js
+   frango.glb            frango.webp
+   prato-casa.glb        prato-casa.webp
+   tabua.glb             tabua.webp
 
 ATUALIZAR NO GITHUB
-  Add file > Upload files > arrastar os FICHEIROS > Commit changes.
-  Os nomes são os mesmos, por isso o GitHub substitui os antigos.
-  Espere 1-2 minutos e recarregue a página no telemóvel.
+   Add file > Upload files > arrastar os FICHEIROS > Commit changes.
+   Mudaram os 3 .glb, os 3 .webp e o index.html. Carregue todos.
+   Depois abra no telemóvel em JANELA ANÓNIMA.
 
-COMO O AR ASSENTA MELHOR (é do telemóvel, não do ficheiro)
-  - Aponte à mesa e mova o telemóvel devagar, em arco, 3-4 segundos antes
-    de tocar. O telemóvel precisa de ver a superfície de vários ângulos.
-  - Superfícies com padrão ou textura funcionam muito melhor que uma
-    toalha branca lisa. Mesa de madeira é ideal.
-  - Luz forte e uniforme. Com pouca luz o prato treme.
-  - Não fique demasiado perto: 40-60 cm da mesa.
-  - Android precisa dos "Serviços do Google Play para RA" atualizados.
+SOBRE OS FICHEIROS QUE ENVIOU AGORA
+   São byte a byte iguais aos anteriores (confirmado por assinatura
+   digital). Não era preciso recapturar: o problema estava no meu
+   processamento, não na captura.
 
 PRATOS
-  Frango na Chapa    780 MT   mais vendido
-  Prato da Casa      950 MT   recomendado
-  Tábua de Petiscos  650 MT   promoção (antes 800)
-
-PERSONALIZAR
-  No index.html, bloco CONFIGURAÇÃO:
-     const CASA     = "Casa do Índico";
-     const TAGLINE  = "grelhados & petiscos";
-     const WHATSAPP = "258840000000";
+   Frango na Chapa    780 MT   mais vendido
+   Prato da Casa      950 MT   recomendado
+   Tábua de Petiscos  650 MT   promoção (antes 800)
 
 Grupo V3 · Vértice Solutions

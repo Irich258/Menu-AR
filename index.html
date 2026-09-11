@@ -311,15 +311,15 @@ const CATS = [
 const MENU = {
   grelhados: [
     {n:"Frango na Chapa", d:"Meio frango em molho da casa, servido na frigideira de ferro a escaldar", p:780,
-     t:["top"], m:"frango.glb", f:"frango.webp"},
+     t:["top"], m:"frango.glb", u:"frango.usdz", f:"frango.webp"},
     {n:"Prato da Casa", d:"Carnes grelhadas variadas com arroz, feijão e salada fresca", p:950,
-     t:["rec"], m:"prato-casa.glb", f:"prato-casa.webp"},
+     t:["rec"], m:"prato-casa.glb", u:"prato-casa.usdz", f:"prato-casa.webp"},
     {n:"Espetada de Novilho", d:"Duas espetadas com arroz e salada", p:890},
     {n:"Costeleta de Porco", d:"Grelhada em lenha, com puré e legumes", p:680}
   ],
   petiscos: [
     {n:"Tábua de Petiscos", d:"Espetada de queijo e tomate, azeitonas, pão torrado e fruta da época", p:650, ant:800,
-     m:"tabua.glb", f:"tabua.webp"},
+     m:"tabua.glb", u:"tabua.usdz", f:"tabua.webp"},
     {n:"Rissóis de Camarão", d:"Seis unidades, fritos na hora", p:350, t:["top"]},
     {n:"Pastéis de Bacalhau", d:"Quatro unidades, com limão", p:320}
   ],
@@ -415,10 +415,11 @@ function abrir(p){
   document.getElementById('dAviso').textContent = '';
   const bt = document.getElementById('btAr'); bt.disabled = true;
   palco.innerHTML = `<model-viewer id="mv" src="${p.m}" alt="${p.n}" ar
-    ar-modes="webxr scene-viewer quick-look" ar-scale="fixed" ar-placement="floor"
+    ${p.u ? `ios-src="${p.u}"` : ''}
+    ar-modes="scene-viewer webxr quick-look" ar-scale="fixed" ar-placement="floor"
     xr-environment
     camera-controls touch-action="none" min-field-of-view="25deg"
-    shadow-intensity="1" shadow-softness="0.8" exposure="1.0" tone-mapping="neutral"
+    shadow-intensity="1" shadow-softness="0.8" environment-image="neutral" exposure="0.92" tone-mapping="neutral"
     camera-orbit="18deg 66deg auto" poster="${p.f}"></model-viewer>`;
   mv = document.getElementById('mv');
   mv.addEventListener('load', () => {
@@ -520,7 +521,8 @@ atualizar();
 <script>
 (async () => {
   const precisa = ["model-viewer.min.js","frango.glb","prato-casa.glb","tabua.glb",
-                   "frango.webp","prato-casa.webp","tabua.webp"];
+                   "frango.webp","prato-casa.webp","tabua.webp",
+                   "frango.usdz","prato-casa.usdz","tabua.usdz"];
   const falta = [];
   for (const f of precisa) {
     try { const r = await fetch(f, {method:"HEAD"}); if (!r.ok) falta.push(f + " (" + r.status + ")"); }

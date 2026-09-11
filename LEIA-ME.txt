@@ -1,75 +1,67 @@
-MENU DIGITAL 3D/AR — V3 FOOD   (qualidade máxima)
-=================================================
+MENU DIGITAL 3D/AR — V3 FOOD   (corrigido para iPhone)
+======================================================
 
-O QUE FOI CORRIGIDO NESTA VERSÃO
+A CAUSA DO AR VAZIO NO IPHONE
+  O iPhone não usa o mesmo caminho do Android.
+  Android  -> Scene Viewer, que lê ficheiros GLB.
+  iPhone   -> Quick Look da Apple, que SÓ lê ficheiros USDZ.
 
-1. PERDA DE DETALHE — era culpa do processamento anterior
-   Medi a nitidez da textura original e da que eu tinha entregue:
+  Até agora só existiam GLB. O menu tentava converter GLB para USDZ
+  dentro do telemóvel — era esse o "a processar" que via. Essa conversão
+  automática falha com modelos deste tamanho, e o Quick Look abria vazio.
 
-        prato-casa   -46% de detalhe perdido
-        tabua        -22% de detalhe perdido
-        frango         0% (a captura já vinha macia de origem)
+A CORREÇÃO
+  Cada prato passa a ter o seu USDZ nativo, o mesmo que saiu do KIRI,
+  com a textura intacta. Só lhes foi aplicada a escala para o prato
+  ficar com 30 cm reais.
 
-   A compressão WebP estava demasiado agressiva. Agora a textura vai a
-   qualidade 98 e não há perda nenhuma:
+  Agora existem os dois formatos, e cada telemóvel usa o seu:
+     frango.glb / frango.usdz
+     prato-casa.glb / prato-casa.usdz
+     tabua.glb / tabua.usdz
 
-        prato-casa   +8%   (igual ou melhor que o original)
-        tabua        +11%
-        frango       +49%
+  Nada é convertido no telemóvel. Nenhuma resolução foi reduzida.
 
-   Nenhuma resolução foi reduzida. As texturas continuam 4096x4096.
+O PESO — a contrapartida honesta
+     frango.usdz       5,4 MB
+     prato-casa.usdz  21,5 MB
+     tabua.usdz       19,7 MB
 
-2. PALIDEZ — era iluminação a mais
-   A textura da fotogrametria já traz cozida a luz do restaurante onde o
-   prato foi fotografado. O menu estava a somar-lhe mais luz por cima,
-   e isso lavava as cores.
+  São os ficheiros originais do KIRI, em qualidade máxima. Ao abrir o
+  AR, o iPhone descarrega o USDZ inteiro. Com wifi é rápido; com dados
+  móveis fracos pode demorar bastante.
 
-   Os modelos passaram a usar material sem iluminação adicional
-   (KHR_materials_unlit). A textura aparece tal como foi capturada.
-   A sombra por baixo mantém-se, para o prato não parecer a flutuar.
+  COMECE PELO FRANGO, que é o mais leve.
+  Se o peso incomodar em uso real, diga: reduzo a textura dos USDZ e o
+  peso cai para menos de um terço, com perda pequena.
 
-PESO — a contrapartida honesta
-        frango.glb        1,87 MB
-        prato-casa.glb    3,76 MB
-        tabua.glb         2,37 MB
+11 FICHEIROS (todos no mesmo nível, sem subpastas)
+  index.html            model-viewer.min.js
+  frango.glb            frango.usdz            frango.webp
+  prato-casa.glb        prato-casa.usdz        prato-casa.webp
+  tabua.glb             tabua.usdz             tabua.webp
 
-   São ficheiros pesados. Foi a escolha deliberada de não reduzir
-   resolução. O menu continua a abrir depressa (~180 KB) porque só
-   carrega o modelo 3D quando alguém toca no prato. Mas o primeiro
-   toque, em dados móveis, pode demorar alguns segundos.
-
-   Se em uso real isso incomodar, dá-se um passo atrás: textura a
-   qualidade 90 corta o peso quase a metade com perda mínima. Diga.
-
-*** ANTES DE USAR: PÔR O NÚMERO DE WHATSAPP ***
-   No index.html, bloco CONFIGURAÇÃO:
-      const WHATSAPP = "258840000000";
-   Código do país + número, sem +, sem espaços, sem zero à frente.
-      84 123 4567  ->  "258841234567"
-
-UM LINK, DOIS USOS
-   Bio do Instagram:   .../Menu-AR/          abre em modo ENTREGA
-   QR de cada mesa:    .../Menu-AR/?mesa=1   abre em COMER AQUI
-
-OS 8 FICHEIROS (todos no mesmo nível, sem subpastas)
-   index.html            model-viewer.min.js
-   frango.glb            frango.webp
-   prato-casa.glb        prato-casa.webp
-   tabua.glb             tabua.webp
+  Se algum faltar, o menu mostra uma barra vermelha a dizer qual.
 
 ATUALIZAR NO GITHUB
-   Add file > Upload files > arrastar os FICHEIROS > Commit changes.
-   Mudaram os 3 .glb, os 3 .webp e o index.html. Carregue todos.
-   Depois abra no telemóvel em JANELA ANÓNIMA.
+  Add file > Upload files > arrastar os FICHEIROS > Commit changes.
+  Há 3 ficheiros NOVOS (os .usdz) além do index.html alterado.
+  Estes ficheiros são grandes; o upload e a publicação demoram mais.
+  Espere o visto verde e abra em JANELA ANÓNIMA.
 
-SOBRE OS FICHEIROS QUE ENVIOU AGORA
-   São byte a byte iguais aos anteriores (confirmado por assinatura
-   digital). Não era preciso recapturar: o problema estava no meu
-   processamento, não na captura.
+*** ANTES DE MOSTRAR A UM RESTAURANTE ***
+  No index.html, bloco CONFIGURAÇÃO:
+     const WHATSAPP = "258840000000";
+  Ponha o número real: código do país + número, sem +, sem espaços.
+     84 123 4567  ->  "258841234567"
+
+UM LINK, DOIS USOS
+  Bio do Instagram:  .../Menu-AR/          abre em modo ENTREGA
+  QR de cada mesa:   .../Menu-AR/?mesa=1   abre em COMER AQUI
 
 PRATOS
-   Frango na Chapa    780 MT   mais vendido
-   Prato da Casa      950 MT   recomendado
-   Tábua de Petiscos  650 MT   promoção (antes 800)
+  Frango na Chapa    780 MT   mais vendido
+  Prato da Casa      950 MT   recomendado
+  Tábua de Petiscos  650 MT   promoção (antes 800)
 
 Grupo V3 · Vértice Solutions

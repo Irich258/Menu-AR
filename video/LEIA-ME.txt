@@ -1,0 +1,60 @@
+VERSÃO VÍDEO — V3 FOOD
+======================
+
+O QUE É
+  É a mesma versão que já está publicada, com uma única troca:
+  onde aparecia o prato em 3D, aparece agora a animação do YouTube.
+
+  Layout igual. Cartões iguais. Etiquetas, preços e pedido iguais.
+
+  O botão "Ver na minha mesa" NÃO mudou: continua a abrir o modelo 3D
+  em realidade aumentada. O modelo continua lá, apenas invisível por
+  trás do vídeo — é dele que o AR se serve.
+
+ONDE COLOCAR
+  Este ficheiro vai para uma PASTA NOVA chamada video, dentro do mesmo
+  repositório Menu-AR. A versão atual não se toca.
+
+  No GitHub:
+    Add file > Create new file
+    No nome do ficheiro escreva:  video/index.html
+    (a barra cria a pasta automaticamente)
+    Cole o conteúdo do index.html e faça Commit.
+
+  Ou, mais simples:
+    Add file > Upload files > arrastar a PASTA video inteira.
+
+  Fica assim:
+    irich258.github.io/Menu-AR/          versão 3D  (a atual)
+    irich258.github.io/Menu-AR/video/    versão vídeo (esta)
+
+  Os modelos, texturas e o motor 3D são partilhados com a pasta de
+  cima. Não é preciso duplicar ficheiro nenhum.
+
+VÍDEOS ATRIBUÍDOS
+  Frango na Chapa      JrY9Itgxsf8
+  Prato da Casa        15qtE2f-3PY
+  Tábua de Petiscos    L5GQdVFGMBQ
+
+  Para trocar, procure no index.html o campo  v:"..."  de cada prato
+  e substitua pelo ID do vídeo. O ID é o que vem depois de "v=" no
+  endereço do YouTube.
+
+COMO OS VÍDEOS ESTÃO CONFIGURADOS
+  Arrancam sozinhos, sem som, em ciclo, sem controlos e sem vídeos
+  sugeridos no fim. Comportam-se como um cartaz animado.
+
+LIMITAÇÕES DO YOUTUBE (a ter em conta)
+  - O vídeo é 16:9 e o espaço do cartão não é. Vão aparecer barras
+    pretas em cima e em baixo. Se preferir sem barras, diga: corta-se
+    o vídeo para preencher.
+  - Sem som no arranque automático. É regra dos telemóveis.
+  - Cada cliente que abrir descarrega o vídeo outra vez. O YouTube não
+    guarda nada em cache. Numa noite cheia é muito tráfego no wifi.
+  - O vídeo tem de ser público ou não listado. Privado não funciona.
+  - Se o YouTube estiver lento, o menu parece avariado.
+
+  Alternativa, quando quiser: alojar os vídeos connosco em MP4. Fica
+  sem marca, sem barras, mais leve e sem depender do YouTube.
+
+Grupo V3 · Vértice Solutions

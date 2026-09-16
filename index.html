@@ -176,6 +176,9 @@ input:focus{outline:2px solid var(--ambar);outline-offset:1px;border-color:trans
 .oculto{display:none}
 .enviar{width:100%;margin-top:20px;background:#25D366;color:#08351E;border:0;border-radius:14px;
   padding:17px;font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer}
+.pagar{width:100%;margin-top:6px;background:var(--preto);color:var(--ambar);border:0;border-radius:14px;
+  padding:17px;font-family:var(--sans);font-size:15px;font-weight:700;cursor:pointer}
+.passo{font-size:11.5px;color:var(--cinza);margin-top:10px;line-height:1.45;text-align:center}
 .cancelar{width:100%;margin-top:8px;background:none;border:0;color:var(--cinza);font-family:var(--sans);
   font-size:13.5px;padding:10px;cursor:pointer}
 .nota{font-size:11.5px;color:var(--cinza);margin-top:13px;line-height:1.45}
@@ -282,9 +285,24 @@ footer b{color:#241F1A}
     <input id="fNome" type="text" placeholder="Como o devemos tratar" autocomplete="name">
     <label for="fTel">Telemóvel</label>
     <input id="fTel" type="tel" placeholder="84 000 0000" autocomplete="tel">
+    <div id="blocoPag" class="oculto">
+      <label>Como quer pagar</label>
+      <div class="escolha">
+        <button id="pgLocal" class="sel">No local ou na entrega</button>
+        <button id="pgEmola">Já a seguir, por e-Mola</button>
+      </div>
+    </div>
     <button class="enviar" id="btEnviar">Enviar pedido pelo WhatsApp</button>
     <button class="cancelar" id="btCancelar">Continuar a escolher</button>
     <p class="nota">Usamos o nome para o servirmos pelo nome e o contacto para confirmar o pedido e o avisar das novidades da casa.</p>
+  </div>
+  <div class="caixa oculto" id="painelEnviado">
+    <h3>Pedido enviado</h3>
+    <p class="nota" style="margin:0 0 4px">O restaurante recebeu o seu pedido pelo WhatsApp e vai confirmar consigo.</p>
+    <div class="total"><span>Total</span><span id="eTotal">0 MT</span></div>
+    <button class="pagar" id="btPagar">Pagar com e-Mola</button>
+    <p class="passo" id="passoPagar">Abre a aplicação e-Mola com o número do restaurante já carregado. Escreva o valor acima e confirme.</p>
+    <button class="cancelar" id="btFecharTudo">Pago no local, obrigado</button>
   </div>
 </div>
 
@@ -293,6 +311,8 @@ footer b{color:#241F1A}
 const CASA     = "Casa do Índico";
 const TAGLINE  = "grelhados & petiscos";
 const WHATSAPP = "258840000000";   // sem + nem espaços
+const EMOLA    = "https://emolaapp.mmola.co.mz/qr?v=1&d=00020101021153039435802MZ62500803P2P02098762812000926AHMAD%20ZEINUL%20ABEDINE%20AHMED63043CC2";
+// deixe EMOLA = "" para tirar a opção de pagar já
 /* ==========================================================================
    Etiquetas:   t:["top"] mais vendido · t:["rec"] recomendado
    Promoção:    ant: <preço antigo>
@@ -493,6 +513,32 @@ bEnt.addEventListener('click',  () => modo(true));
 if (MESA_URL) { document.getElementById('fMesa').value = MESA_URL; modo(false); }
 else { modo(true); }
 
+let pagaJa = false;
+if (EMOLA) {
+  document.getElementById('blocoPag').classList.remove('oculto');
+  const pl = document.getElementById('pgLocal'), pe = document.getElementById('pgEmola');
+  const escolher = e => { pagaJa = e; pl.classList.toggle('sel', !e); pe.classList.toggle('sel', e); };
+  pl.addEventListener('click', () => escolher(false));
+  pe.addEventListener('click', () => escolher(true));
+  document.getElementById('btPagar').addEventListener('click', () => window.open(EMOLA, '_blank'));
+}
+function mostrarPasso2(total){
+  document.getElementById('eTotal').textContent = mt(total);
+  const bp = document.getElementById('btPagar'), pp = document.getElementById('passoPagar');
+  const oferecer = EMOLA && pagaJa;
+  bp.classList.toggle('oculto', !oferecer);
+  pp.classList.toggle('oculto', !oferecer);
+  bp.textContent = `Pagar ${mt(total)} com e-Mola`;
+  document.getElementById('btFecharTudo').textContent = oferecer ? 'Prefiro pagar no local' : 'Fechar';
+  document.querySelector('.caixa').classList.add('oculto');
+  document.getElementById('painelEnviado').classList.remove('oculto');
+}
+document.getElementById('btFecharTudo').addEventListener('click', () => {
+  modal.classList.remove('on');
+  document.querySelector('.caixa').classList.remove('oculto');
+  document.getElementById('painelEnviado').classList.add('oculto');
+  pedido.length = 0; atualizar();
+});
 document.getElementById('btEnviar').addEventListener('click', () => {
   const nome = document.getElementById('fNome').value.trim();
   const tel  = document.getElementById('fTel').value.trim();
@@ -504,8 +550,10 @@ document.getElementById('btEnviar').addEventListener('click', () => {
   const linhas = pedido.map(p => `• ${p.n} — ${mt(p.p)}`).join('\n');
   const total  = mt(pedido.reduce((s,p)=>s+p.p,0));
   const onde   = entrega ? `ENTREGA\nMorada: ${mor}` : `COMER AQUI · Mesa ${mesa}`;
-  const texto  = `*NOVO PEDIDO — ${CASA}*\n${onde}\n\n${linhas}\n\n*Total: ${total}*\n\nNome: ${nome}\nContacto: ${tel}\n\n_Enviado pelo menu digital_`;
+  const forma  = (EMOLA && pagaJa) ? 'Vai pagar já por e-Mola' : 'Paga no local ou na entrega';
+  const texto  = `*NOVO PEDIDO — ${CASA}*\n${onde}\n\n${linhas}\n\n*Total: ${total}*\nPagamento: ${forma}\n\nNome: ${nome}\nContacto: ${tel}\n\n_Enviado pelo menu digital_`;
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank');
+  mostrarPasso2(pedido.reduce((s,p)=>s+p.p,0));
 });
 atualizar();
 </script>

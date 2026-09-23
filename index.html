@@ -43,24 +43,33 @@ img{display:block;max-width:100%}
 .busca input{flex:1;background:none;border:0;color:#fff;font-family:var(--sans);font-size:14px;outline:none}
 .busca input::placeholder{color:#6E6A62}
 
-/* ---------- VITRINA DE VIDEO ---------- */
-.vitrina{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:14px 16px 0}
-.vitr{position:relative;aspect-ratio:1/1;border-radius:18px;overflow:hidden;border:0;padding:0;
-  background:#141412;cursor:pointer;display:block;width:100%;text-align:left;
-  box-shadow:0 6px 20px rgba(15,15,13,.16)}
+/* ---------- CARROSSEL DE PROMOCOES (retangulo vertical) ---------- */
+.promos{padding:14px 0 0;position:relative}
+.trilho{display:flex;gap:12px;overflow-x:auto;scroll-snap-type:x mandatory;
+  padding:0 16px;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+.trilho::-webkit-scrollbar{display:none}
+.vitr{position:relative;flex:0 0 72%;aspect-ratio:2/3;border-radius:20px;overflow:hidden;border:0;padding:0;
+  background:#141412;cursor:pointer;scroll-snap-align:center;text-align:left;
+  box-shadow:0 8px 24px rgba(15,15,13,.20)}
 .vitr video,.vitr img.cap{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
 .vitr video{opacity:0;transition:opacity .5s}
 .vitr video.pronto{opacity:1}
 .vitr::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(to top,rgba(10,10,9,.92) 0%,rgba(10,10,9,.45) 34%,transparent 62%)}
-.vitr .tag{position:absolute;top:10px;left:10px;z-index:3;font-size:9px;font-weight:700;
-  letter-spacing:.09em;text-transform:uppercase;padding:5px 9px;border-radius:7px}
-.vitr .txt{position:absolute;left:12px;right:12px;bottom:11px;z-index:3}
+  background:linear-gradient(to top,rgba(10,10,9,.94) 0%,rgba(10,10,9,.42) 40%,transparent 66%)}
+.vitr .tag{position:absolute;top:12px;left:12px;z-index:3;font-size:9.5px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;padding:6px 10px;border-radius:8px}
+.vitr .txt{position:absolute;left:14px;right:14px;bottom:14px;z-index:3}
 .vitr .txt>span{display:block}
-.vitr .tit{font-family:var(--display);font-size:21px;color:#fff;letter-spacing:.02em;line-height:1.0}
-.vitr .sub{font-size:11px;color:rgba(255,255,255,.72);margin-top:3px;line-height:1.3}
-.vitr .val{font-family:var(--display);font-size:19px;color:var(--ambar);margin-top:5px;letter-spacing:.02em}
-.vitr .val s{font-family:var(--sans);font-size:10.5px;color:rgba(255,255,255,.5);margin-right:5px;font-weight:500}
+.vitr .tit{font-family:var(--display);font-size:26px;color:#fff;letter-spacing:.02em;line-height:1.0}
+.vitr .sub{font-size:12px;color:rgba(255,255,255,.76);margin-top:4px;line-height:1.3}
+.vitr .val{font-family:var(--display);font-size:23px;color:var(--ambar);margin-top:7px;letter-spacing:.02em}
+.vitr .val s{font-family:var(--sans);font-size:11.5px;color:rgba(255,255,255,.5);margin-right:6px;font-weight:500}
+
+.pontos{display:flex;gap:6px;justify-content:center;align-items:center;margin-top:11px}
+.pontos i{width:6px;height:6px;border-radius:50%;background:#D8D2C6;transition:width .25s,background .25s}
+.pontos i.on{width:20px;background:var(--preto);border-radius:100px}
+.pausa{background:none;border:0;color:var(--cinza);font-family:var(--sans);font-size:10.5px;
+  font-weight:700;cursor:pointer;padding:3px 8px;margin-left:5px;letter-spacing:.04em}
 
 /* ---------- CATEGORIAS ---------- */
 .cats{display:flex;gap:8px;overflow-x:auto;padding:20px 16px 2px;scrollbar-width:none;
@@ -94,6 +103,8 @@ img{display:block;max-width:100%}
 .rodape-card{display:flex;align-items:center;justify-content:space-between;margin-top:9px;gap:8px}
 .preco{font-family:var(--display);font-size:19px;letter-spacing:.02em;color:var(--preto);line-height:1}
 .preco s{font-family:var(--sans);font-size:11px;color:var(--cinza);margin-right:5px;font-weight:500}
+.card .preco{white-space:nowrap}
+.card .preco s{display:block;margin:0 0 2px;font-size:10.5px}
 .mais{width:30px;height:30px;border-radius:10px;background:var(--ambar);border:0;color:var(--preto);
   font-size:19px;line-height:1;cursor:pointer;flex:none;font-weight:700}
 .badge{position:absolute;top:9px;left:9px;z-index:2;font-size:9px;font-weight:700;letter-spacing:.07em;
@@ -103,6 +114,15 @@ img{display:block;max-width:100%}
 .b-pro{background:var(--brasa);color:#fff}
 .marca3d{position:absolute;top:9px;right:9px;z-index:2;background:rgba(15,15,13,.9);color:var(--ambar);
   font-size:9px;font-weight:700;letter-spacing:.09em;padding:4px 7px;border-radius:6px}
+
+/* ---------- PROMOÇÃO ---------- */
+.promo{margin:22px 16px 0;background:linear-gradient(110deg,var(--brasa),#A8321A);border-radius:18px;
+  padding:20px;color:#fff;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
+.promo::after{content:'';position:absolute;width:150px;height:150px;right:-50px;bottom:-70px;border-radius:50%;
+  background:rgba(255,255,255,.11)}
+.promo .num{font-family:var(--display);font-size:44px;line-height:.82;color:var(--ambar-cl);flex:none}
+.promo h3{font-family:var(--display);font-size:21px;letter-spacing:.02em}
+.promo p{font-size:12px;color:rgba(255,255,255,.86);margin-top:3px}
 
 /* ---------- LISTA ---------- */
 .lista-sec{padding:0 16px}
@@ -165,6 +185,24 @@ button.ar:disabled{opacity:.38;cursor:not-allowed}
 .fundo .pedir em{font-style:normal;background:var(--preto);color:var(--ambar);border-radius:9px;
   min-width:20px;height:20px;display:grid;place-items:center;font-size:11px;padding:0 5px}
 
+/* ---------- BARRA DE PROMOCAO ---------- */
+.faixa{position:fixed;left:0;right:0;z-index:45;max-width:480px;margin:0 auto;
+  bottom:calc(62px + env(safe-area-inset-bottom));padding:0 12px;
+  transform:translateY(0);transition:transform .3s,opacity .3s;opacity:1}
+.faixa.esconde{transform:translateY(130%);opacity:0;pointer-events:none}
+.faixa button{width:100%;display:flex;align-items:center;gap:11px;border:0;cursor:pointer;
+  background:linear-gradient(110deg,#1B1B18,#0F0F0D 70%);border-radius:15px;
+  padding:10px 12px;box-shadow:0 6px 22px rgba(15,15,13,.32);text-align:left}
+.faixa .selo{font-family:var(--display);font-size:24px;color:var(--ambar);line-height:.9;flex:none;
+  padding:0 2px}
+.faixa .meio{flex:1;min-width:0}
+.faixa .t1,.faixa .t2{display:block}
+.faixa .t1{font-size:12.5px;font-weight:700;color:#fff;line-height:1.25}
+.faixa .t2{font-size:10.5px;color:#9A948B;margin-top:2px;line-height:1.3}
+.faixa .cta{flex:none;background:var(--ambar);color:var(--preto);font-size:11.5px;font-weight:700;
+  padding:8px 13px;border-radius:10px;white-space:nowrap}
+.faixa .mini-foto{width:44px;height:44px;border-radius:11px;object-fit:cover;flex:none}
+
 /* ---------- MODAL ---------- */
 .modal{position:fixed;inset:0;z-index:80;background:rgba(10,10,9,.68);display:none;align-items:flex-end}
 .modal.on{display:flex}
@@ -194,7 +232,7 @@ input:focus{outline:2px solid var(--ambar);outline-offset:1px;border-color:trans
   font-size:13.5px;padding:10px;cursor:pointer}
 .nota{font-size:11.5px;color:var(--cinza);margin-top:13px;line-height:1.45}
 
-footer{padding:34px 20px 130px;text-align:center;color:var(--cinza);font-size:11.5px}
+footer{padding:34px 20px 196px;text-align:center;color:var(--cinza);font-size:11.5px}
 footer b{color:#241F1A}
 :focus-visible{outline:2px solid var(--ambar);outline-offset:2px}
 </style>
@@ -222,7 +260,10 @@ footer b{color:#241F1A}
     </div>
   </div>
 
-  <div class="vitrina" id="vitrina"></div>
+  <div class="promos">
+    <div class="trilho" id="trilho"></div>
+    <div class="pontos" id="pontos"></div>
+  </div>
 
   <div class="cats" id="cats"></div>
 
@@ -255,6 +296,17 @@ footer b{color:#241F1A}
     <div class="aviso" id="dAviso"></div>
     <div class="aviso" id="notaAr" style="margin-top:2px">Em AR: aponte para a mesa e mova o telemóvel devagar até o prato assentar.</div>
   </div>
+</div>
+
+<div class="faixa esconde" id="faixa">
+  <button id="btBump">
+    <img class="mini-foto" id="bumpFoto" alt="">
+    <span class="meio">
+      <span class="t1" id="bumpT1"></span>
+      <span class="t2" id="bumpT2"></span>
+    </span>
+    <span class="cta" id="bumpCta">Juntar</span>
+  </button>
 </div>
 
 <div class="fundo">
@@ -317,12 +369,14 @@ const EMOLA    = "https://emolaapp.mmola.co.mz/qr?v=1&d=00020101021153039435802M
    Promoção:    ant: <preço antigo>
    Com 3D:      m:"x.glb", f:"x.webp"
    Com vídeo:   vid:"x.mp4", f:"x.webp"   (tem de existir tambem x.webm)
+   so:1         prato que só aparece no carrossel, não na grelha de destaques
    ========================================================================== */
 
 const CATS = [
   {id:"grelhados", n:"Grelhados",  i:"G"},
   {id:"petiscos",  n:"Petiscos",   i:"P"},
   {id:"mar",       n:"Do mar",     i:"M"},
+  {id:"pizzas",    n:"Pizzas",     i:"P"},
   {id:"acomp",     n:"Acompanha.", i:"A"},
   {id:"doces",     n:"Sobremesas", i:"S"},
   {id:"bebidas",   n:"Bebidas",    i:"B"}
@@ -347,6 +401,14 @@ const MENU = {
     {n:"Rissóis de Camarão", d:"Seis unidades, fritos na hora", p:350, t:["top"]},
     {n:"Pastéis de Bacalhau", d:"Quatro unidades, com limão", p:320}
   ],
+  pizzas: [
+    {n:"Pizza da Casa", d:"Massa fina, mozzarella, fiambre e oregãos, saída do forno a lenha", p:690, ant:850,
+     vid:"pizza.mp4", f:"pizza.webp", so:1},
+    {n:"Pizza Quatro Estações", d:"Mozzarella, cogumelos, pimento, azeitona e chouriço", p:790, ant:950,
+     vid:"pizza2.mp4", f:"pizza2.webp", so:1},
+    {n:"Pizza Margarita", d:"Tomate, mozzarella e manjericão fresco", p:540},
+    {n:"Pizza de Camarão", d:"Camarão salteado, alho e um toque de piri-piri", p:920, t:["rec"]}
+  ],
   mar: [
     {n:"Peixe do Dia", d:"Grelhado em lenha, com limão e legumes salteados", p:850, t:["rec"]},
     {n:"Camarão à Laurentina", d:"Salteado em cerveja, alho e piri-piri", p:1250},
@@ -368,11 +430,16 @@ const MENU = {
   ]
 };
 
-/* os dois quadrados do topo: categoria, indice do prato, etiqueta, legenda, video */
+/* carrossel de promocoes: categoria, indice do prato, etiqueta, legenda, video */
 const VITRINA = [
-  {c:"grelhados", i:2, tag:"Destaque do dia", sub:"Sai da brasa a toda a hora", vid:"asas.mp4",   f:"asas.webp",   cor:"b-top"},
-  {c:"petiscos",  i:1, tag:"Promoção",        sub:"Só esta semana",            vid:"sandes.mp4", f:"sandes.webp", cor:"b-pro"}
+  {c:"pizzas",    i:0, tag:"Promoção",        sub:"Forno a lenha, só esta semana", vid:"pizza.mp4",       f:"pizza.webp",       cor:"b-pro"},
+  {c:"grelhados", i:2, tag:"Destaque do dia", sub:"Sai da brasa a toda a hora",    vid:"asas.mp4",        f:"asas.webp",        cor:"b-top"},
+  {c:"pizzas",    i:1, tag:"Promoção",        sub:"Cinco sabores numa só",         vid:"pizza2.mp4",      f:"pizza2.webp",      cor:"b-pro"},
+  {c:"petiscos",  i:1, tag:"Promoção",        sub:"Enquanto houver",               vid:"sandes-alta.mp4", f:"sandes-alta.webp", cor:"b-pro"}
 ];
+
+/* barra de promocao no fundo (order bump) */
+const BUMP = {c:"doces", i:0, p:150};
 
 const mt = v => v.toLocaleString('pt-PT') + " MT";
 document.getElementById('nomeCasa').textContent = CASA;
@@ -387,8 +454,9 @@ const tipos = p => { const t=[...(p.t||[])]; if (p.ant) t.unshift("pro"); return
 const preco = p => p.ant ? `<s>${mt(p.ant)}</s>${mt(p.p)}` : mt(p.p);
 const etis  = p => tipos(p).map(t => `<span class="eti ${cls[t]}">${rot[t]}</span>`).join('');
 
-/* vitrina */
-document.getElementById('vitrina').innerHTML = VITRINA.map(v => {
+/* ---------- carrossel de promocoes ---------- */
+const trilho = document.getElementById('trilho');
+trilho.innerHTML = VITRINA.map(v => {
   const p = MENU[v.c][v.i];
   return `<button class="vitr" data-c="${v.c}" data-i="${v.i}">
     <img class="cap" src="${v.f}" alt="${p.n}">
@@ -401,6 +469,57 @@ document.getElementById('vitrina').innerHTML = VITRINA.map(v => {
     </span></button>`;
 }).join('');
 
+const pontos = document.getElementById('pontos');
+pontos.innerHTML = VITRINA.map((_,k) => `<i data-k="${k}"${k?'':' class="on"'}></i>`).join('')
+  + `<button class="pausa" id="btPausa" aria-label="Parar rotação">PAUSAR</button>`;
+
+let slide = 0, rodar = true, temp = null;
+
+function irPara(k, suave){
+  const alvo = trilho.children[k];
+  if (!alvo) return;
+  trilho.scrollTo({left: alvo.offsetLeft - (trilho.clientWidth - alvo.clientWidth)/2,
+                   behavior: suave === false ? 'auto' : 'smooth'});
+}
+function pontoActivo(k){
+  slide = k;
+  pontos.querySelectorAll('i').forEach((d,j) => d.classList.toggle('on', j === k));
+}
+function agendar(){
+  clearTimeout(temp);
+  if (!rodar) return;
+  temp = setTimeout(() => { irPara((slide + 1) % VITRINA.length); agendar(); }, 6000);
+}
+agendar();
+
+let vigia = null;
+trilho.addEventListener('scroll', () => {
+  clearTimeout(vigia);
+  vigia = setTimeout(() => {
+    const meio = trilho.scrollLeft + trilho.clientWidth/2;
+    let perto = 0, dif = Infinity;
+    [...trilho.children].forEach((el,j) => {
+      const c = el.offsetLeft + el.clientWidth/2;
+      if (Math.abs(c - meio) < dif) { dif = Math.abs(c - meio); perto = j; }
+    });
+    if (perto !== slide) pontoActivo(perto);
+  }, 90);
+}, {passive:true});
+
+/* tocar no trilho pausa a rotacao automatica enquanto o dedo la esta */
+trilho.addEventListener('pointerdown', () => clearTimeout(temp), {passive:true});
+trilho.addEventListener('pointerup',   () => agendar(),          {passive:true});
+
+pontos.addEventListener('click', e => {
+  const d = e.target.closest('i[data-k]');
+  if (d) { irPara(+d.dataset.k); agendar(); return; }
+  if (e.target.closest('#btPausa')) {
+    rodar = !rodar;
+    e.target.closest('#btPausa').textContent = rodar ? 'PAUSAR' : 'RODAR';
+    rodar ? agendar() : clearTimeout(temp);
+  }
+});
+
 /* categorias */
 document.getElementById('cats').innerHTML = CATS.map(c =>
   `<a class="cat" href="#sec-${c.id}">${c.n}</a>`).join('');
@@ -408,7 +527,7 @@ document.getElementById('cats').innerHTML = CATS.map(c =>
 /* destaques */
 const dest = [];
 for (const [c, ps] of Object.entries(MENU))
-  ps.forEach((p,i) => { if (p.m || p.vid || p.ant || (p.t||[]).includes('top')) dest.push({c,i,p}); });
+  ps.forEach((p,i) => { if (!p.so && (p.m || p.vid || p.ant || (p.t||[]).includes('top'))) dest.push({c,i,p}); });
 dest.sort((a,b) => ((b.p.vid?2:0)+(b.p.m?1:0)) - ((a.p.vid?2:0)+(a.p.m?1:0)));
 document.getElementById('nDest').textContent = dest.length + " pratos";
 document.getElementById('grelha').innerHTML = dest.slice(0,6).map(({c,i,p}) => {
@@ -471,7 +590,7 @@ function abrir(p){
       <source src="${p.vid.replace(".mp4",".webm")}" type="video/webm">
       <source src="${p.vid}" type="video/mp4"></video>`;
     sheet.classList.add('open'); document.body.style.overflow = 'hidden';
-    ligarVideos();
+    ligarVideos(); verBump();
     return;
   }
   bt.style.display = ''; gira.style.display = '';
@@ -492,14 +611,39 @@ function abrir(p){
       'Este aparelho não abre realidade aumentada. Pode rodar o prato em 3D acima.';
   }, {once:true});
   sheet.classList.add('open'); document.body.style.overflow = 'hidden';
+  verBump();
 }
 function fechar(){
   sheet.classList.remove('open'); document.body.style.overflow = '';
   setTimeout(() => { palco.innerHTML = ''; }, 320);
+  verBump();
 }
 document.getElementById('btFechar').addEventListener('click', fechar);
 document.addEventListener('keydown', e => { if (e.key === 'Escape') fechar(); });
 document.getElementById('btAr').addEventListener('click', () => mv && mv.activateAR());
+
+/* ---------- barra de promocao (order bump) ---------- */
+const bumpBase = MENU[BUMP.c][BUMP.i];
+const bumpItem = {n: bumpBase.n + " (promoção)", d: bumpBase.d, p: BUMP.p};
+const faixa    = document.getElementById('faixa');
+document.getElementById('bumpT1').textContent = `Junte ${bumpBase.n} por ${mt(BUMP.p)}`;
+document.getElementById('bumpT2').textContent = `Normalmente ${mt(bumpBase.p)} · só com este pedido`;
+const bumpFoto = document.getElementById('bumpFoto');
+if (bumpBase.f) bumpFoto.src = bumpBase.f;
+else bumpFoto.outerHTML = `<span class="selo">${bumpBase.n.charAt(0)}</span>`;
+
+function verBump(){
+  const mostrar = pedido.length > 0 && !pedido.includes(bumpItem) && !modalAberto();
+  faixa.classList.toggle('esconde', !mostrar);
+}
+function modalAberto(){
+  return document.getElementById('modal').classList.contains('on')
+      || document.getElementById('sheet').classList.contains('open');
+}
+document.getElementById('btBump').addEventListener('click', () => {
+  pedido.push(bumpItem);
+  atualizar();
+});
 
 /* pedido */
 const pedido = [];
@@ -515,6 +659,7 @@ function atualizar(){
     : '<div class="item"><span>Ainda não escolheu nada</span><span></span></div>';
   document.querySelectorAll('#listaPedido button[data-r]').forEach(b =>
     b.addEventListener('click', () => { pedido.splice(+b.dataset.r,1); atualizar(); }));
+  verBump();
 }
 document.getElementById('btAdd').addEventListener('click', () => {
   if (atual){ pedido.push(atual); atualizar(); fechar(); } });
@@ -527,11 +672,11 @@ document.addEventListener('click', e => {
 });
 
 const modal = document.getElementById('modal');
-const abrirModal = () => modal.classList.add('on');
+const abrirModal = () => { modal.classList.add('on'); verBump(); };
 document.getElementById('btPedir').addEventListener('click', abrirModal);
 document.getElementById('cesto').addEventListener('click', abrirModal);
-document.getElementById('btCancelar').addEventListener('click', () => modal.classList.remove('on'));
-modal.addEventListener('click', e => { if (e.target === modal) modal.classList.remove('on'); });
+document.getElementById('btCancelar').addEventListener('click', () => { modal.classList.remove('on'); verBump(); });
+modal.addEventListener('click', e => { if (e.target === modal) { modal.classList.remove('on'); verBump(); } });
 
 /* pesquisa */
 document.getElementById('busca').addEventListener('input', e => {
@@ -599,7 +744,6 @@ document.getElementById('btEnviar').addEventListener('click', () => {
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank');
   mostrarPasso2(pedido.reduce((s,p)=>s+p.p,0));
 });
-
 /* videos: a imagem fica ate o video estar pronto, depois entra suave */
 function ligarVideos(){
   document.querySelectorAll('video[preload="auto"]').forEach(v => {
@@ -644,7 +788,8 @@ atualizar();
                    "frango.usdz","prato-casa.usdz","tabua.usdz",
                    "asas.mp4","sandes.mp4","sandes-alta.mp4",
                    "asas.webm","sandes.webm","sandes-alta.webm",
-                   "asas.webp","sandes.webp","sandes-alta.webp"];
+                   "asas.webp","sandes.webp","sandes-alta.webp",
+                   "pizza.mp4","pizza2.mp4","pizza.webm","pizza2.webm","pizza.webp","pizza2.webp"];
   const falta = [];
   for (const f of precisa) {
     try { const r = await fetch(f, {method:"HEAD"}); if (!r.ok) falta.push(f + " (" + r.status + ")"); }

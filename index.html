@@ -144,9 +144,7 @@ img{display:block;max-width:100%}
 .linha .mini{width:74px;height:74px;flex:none;border-radius:14px;background:radial-gradient(circle at 50% 45%,#fff,#EEF0FA 82%);
   border:1px solid var(--linha);display:grid;place-items:center;position:relative;overflow:hidden}
 .linha .mini img{width:92%;height:92%;object-fit:contain}
-.linha .mini.vid img,.linha .mini.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-.linha .mini.vid video{opacity:0;transition:opacity .5s}
-.linha .mini.vid video.pronto{opacity:1}
+.linha .mini.vid img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
 .linha .mini u{position:absolute;bottom:3px;right:3px;background:var(--preto);color:var(--ambar);
   font-size:8px;font-weight:700;letter-spacing:.07em;padding:2px 5px;border-radius:4px;text-decoration:none}
 .linha .info{flex:1;min-width:0}
@@ -472,7 +470,7 @@ trilho.innerHTML = VITRINA.map(v => {
   const p = MENU[v.c][v.i];
   return `<button class="vitr" data-c="${v.c}" data-i="${v.i}">
     <img class="cap" src="${v.f}" alt="${p.n}">
-    <video poster="${v.f}" muted loop playsinline autoplay preload="auto"><source src="${v.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${v.vid}" type="video/mp4"></video>
+    <video poster="${v.f}" muted loop playsinline preload="none"><source src="${v.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${v.vid}" type="video/mp4"></video>
     <span class="tag ${v.cor}">${v.tag}</span>
     <span class="txt">
       <span class="tit">${p.n}</span>
@@ -500,7 +498,10 @@ function pontoActivo(k){
 function agendar(){
   clearTimeout(temp);
   if (!rodar) return;
-  temp = setTimeout(() => { irPara((slide + 1) % VITRINA.length); agendar(); }, 6000);
+  temp = setTimeout(() => {
+    if (!document.hidden && !sheet.classList.contains('open')) irPara((slide + 1) % VITRINA.length);
+    agendar();
+  }, 6000);
 }
 agendar();
 
@@ -548,7 +549,7 @@ document.getElementById('grelha').innerHTML = dest.slice(0,6).map(({c,i,p}) => {
     ${t ? `<span class="badge ${cls[t]}">${rot[t]}</span>` : ''}
     ${p.m ? `<span class="marca3d">3D</span>` : p.vid ? `<span class="marca3d">v&iacute;deo</span>` : ''}
     <div class="foto${p.vid ? ' vid' : ''}" data-c="${c}" data-i="${i}" role="button" tabindex="0">
-      ${p.vid ? `<img src="${p.f}" alt="${p.n}"><video poster="${p.f}" muted loop playsinline autoplay preload="auto"><source src="${p.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${p.vid}" type="video/mp4"></video>`
+      ${p.vid ? `<img src="${p.f}" alt="${p.n}"><video poster="${p.f}" muted loop playsinline preload="none"><source src="${p.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${p.vid}" type="video/mp4"></video>`
         : p.f ? `<img src="${p.f}" alt="${p.n}" loading="lazy">`
               : `<span style="font-family:var(--display);font-size:44px;color:#C9CCE4">${p.n.charAt(0)}</span>`}
     </div>
@@ -562,12 +563,12 @@ document.getElementById('grelha').innerHTML = dest.slice(0,6).map(({c,i,p}) => {
     </div></div>`;
 }).join('');
 
-/* secções */
+/* secções — aqui so a imagem, nunca video: cada video a mais e memoria a mais no telemovel */
 document.getElementById('seccoes').innerHTML = CATS.map(c => `
   <div class="cab" id="sec-${c.id}"><h2>${c.n}</h2><em>${MENU[c.id].length} pratos</em></div>
   <div class="lista-sec">${MENU[c.id].map((p,i) => `
     <div class="linha" ${(p.m||p.vid) ? `data-c="${c.id}" data-i="${i}" role="button" tabindex="0"` : ''}>
-      ${p.vid ? `<span class="mini vid"><img src="${p.f}" alt="${p.n}"><video poster="${p.f}" muted loop playsinline autoplay preload="auto"><source src="${p.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${p.vid}" type="video/mp4"></video><u>v&iacute;deo</u></span>`
+      ${p.vid ? `<span class="mini vid"><img src="${p.f}" alt="${p.n}" loading="lazy"><u>v&iacute;deo</u></span>`
         : p.f ? `<span class="mini"><img src="${p.f}" alt="${p.n}" loading="lazy"><u>3D</u></span>` : ''}
       <span class="info">
         <span class="nome">${p.n}</span>
@@ -598,11 +599,17 @@ function abrir(p){
     gira.style.display = 'none';
     document.getElementById('notaAr').style.display = 'none';
     document.getElementById('palcoBox').classList.add('escuro');
-    palco.innerHTML = `<video class="palcovid" poster="${p.f}" muted loop playsinline autoplay preload="auto">
+    palco.innerHTML = `<video class="palcovid" poster="${p.f}" muted loop playsinline preload="none">
       <source src="${p.vid.replace(".mp4",".webm")}" type="video/webm">
       <source src="${p.vid}" type="video/mp4"></video>`;
     sheet.classList.add('open'); document.body.style.overflow = 'hidden';
-    ligarVideos(); verBump();
+    travarTodos();
+    const vg = palco.querySelector('video');
+    vg.preload = 'auto';
+    vg.addEventListener('playing', () => vg.classList.add('pronto'), {once:true});
+    const pr = vg.play(); if (pr) pr.catch(()=>{});
+    tocando = [vg];            // fica sob o mesmo controlo dos outros
+    verBump();
     return;
   }
   bt.style.display = ''; gira.style.display = '';
@@ -623,11 +630,13 @@ function abrir(p){
       'Este aparelho não abre realidade aumentada. Pode rodar o prato em 3D acima.';
   }, {once:true});
   sheet.classList.add('open'); document.body.style.overflow = 'hidden';
+  travarTodos();          // liberta memoria de video antes de acender o WebGL
   verBump();
 }
 function fechar(){
   sheet.classList.remove('open'); document.body.style.overflow = '';
-  setTimeout(() => { palco.innerHTML = ''; }, 320);
+  mv = null;
+  setTimeout(() => { palco.innerHTML = ''; retomar(); }, 340);
   verBump();
 }
 document.getElementById('btFechar').addEventListener('click', fechar);
@@ -756,20 +765,57 @@ document.getElementById('btEnviar').addEventListener('click', () => {
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank');
   mostrarPasso2(pedido.reduce((s,p)=>s+p.p,0));
 });
-/* videos: a imagem fica ate o video estar pronto, depois entra suave */
+/* ---------- gestor de video ----------
+   O Safari do iPhone so aguenta 2 ou 3 videos a descodificar ao mesmo tempo.
+   Com mais do que isso o separador e morto pelo sistema (ecra branco).
+   Por isso: nada toca sozinho; so toca o que esta mesmo a vista, no maximo 2. */
+const MAX_TOCA = 2;
+let tocando = [];
+const aVista = new Set();
+
+function arrancar(v){
+  if (tocando.includes(v)) return;
+  while (tocando.length >= MAX_TOCA) { const x = tocando.shift(); try { x.pause(); } catch(e){} }
+  tocando.push(v);
+  if (v.preload !== 'auto') { v.preload = 'auto'; try { v.load(); } catch(e){} }
+  const pr = v.play(); if (pr) pr.catch(()=>{});
+}
+function travar(v){
+  tocando = tocando.filter(x => x !== v);
+  try { v.pause(); } catch(e){}
+}
+function travarTodos(){
+  tocando.forEach(v => { try { v.pause(); } catch(e){} });
+  tocando = [];
+}
+function retomar(){
+  if (document.hidden) return;
+  [...aVista].slice(0, MAX_TOCA).forEach(arrancar);
+}
+
+const olho = ('IntersectionObserver' in window)
+  ? new IntersectionObserver(es => {
+      es.forEach(e => {
+        const v = e.target;
+        if (e.isIntersecting) { aVista.add(v); if (!sheet.classList.contains('open')) arrancar(v); }
+        else { aVista.delete(v); travar(v); }
+      });
+    }, {threshold:0.55})
+  : null;
+
 function ligarVideos(){
-  document.querySelectorAll('video[preload="auto"]').forEach(v => {
-    const pronto = () => v.classList.add('pronto');
-    if (v.readyState >= 3) pronto();
-    else v.addEventListener('canplay', pronto, {once:true});
-    const tenta = () => { const pr = v.play(); if (pr) pr.catch(()=>{}); };
-    tenta();
-    v.addEventListener('loadeddata', tenta, {once:true});
+  document.querySelectorAll('video').forEach(v => {
+    if (v.dataset.gerido) return;
+    v.dataset.gerido = '1';
+    v.addEventListener('playing', () => v.classList.add('pronto'), {once:true});
+    if (olho) olho.observe(v);
+    else arrancar(v);   // navegador antigo: toca o primeiro que aparecer
   });
 }
 ligarVideos();
+
 document.addEventListener('visibilitychange', () => {
-  if (!document.hidden) ligarVideos();
+  if (document.hidden) travarTodos(); else retomar();
 });
 
 /* categoria activa conforme a rolagem */
@@ -798,10 +844,9 @@ atualizar();
   const precisa = ["model-viewer.min.js","frango.glb","prato-casa.glb","tabua.glb",
                    "frango.webp","prato-casa.webp","tabua.webp",
                    "frango.usdz","prato-casa.usdz","tabua.usdz",
-                   "asas.mp4","sandes.mp4","sandes-alta.mp4",
-                   "asas.webm","sandes.webm","sandes-alta.webm",
-                   "asas.webp","sandes.webp","sandes-alta.webp",
-                   "pizza.mp4","pizza2.mp4","pizza.webm","pizza2.webm","pizza.webp","pizza2.webp"];
+                   "asas.mp4","sandes-alta.mp4","pizza.mp4","pizza2.mp4",
+                   "asas.webm","sandes-alta.webm","pizza.webm","pizza2.webm",
+                   "asas.webp","sandes-alta.webp","pizza.webp","pizza2.webp"];
   const falta = [];
   for (const f of precisa) {
     try { const r = await fetch(f, {method:"HEAD"}); if (!r.ok) falta.push(f + " (" + r.status + ")"); }

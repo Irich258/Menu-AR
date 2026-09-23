@@ -24,56 +24,69 @@ img{display:block;max-width:100%}
 .app{max-width:480px;margin:0 auto;background:var(--nata);min-height:100vh;position:relative}
 
 /* ---------- BARRA DE TOPO ---------- */
-.barra-topo{background:var(--preto);color:#fff;padding:16px 18px 14px;position:sticky;top:0;z-index:40}
+.barra-topo{background:var(--preto);color:#fff;padding:13px 18px 12px;position:sticky;top:0;z-index:40}
 .marca{display:flex;align-items:center;justify-content:space-between;gap:12px}
 .logo{display:flex;align-items:center;gap:9px}
 .chama{width:30px;height:30px;border-radius:9px;background:linear-gradient(150deg,var(--ambar),var(--brasa));
   display:grid;place-items:center;font-family:var(--display);font-size:17px;color:var(--preto);padding-top:2px}
 .casa{font-family:var(--display);font-size:26px;letter-spacing:.035em;line-height:1}
-.tagline{font-size:9.5px;letter-spacing:.19em;color:var(--ambar);text-transform:uppercase;margin-top:1px}
+.tagline{font-size:9.5px;letter-spacing:.15em;color:var(--ambar);text-transform:uppercase;margin-top:2px;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:62vw}
 .cesto{position:relative;width:40px;height:40px;border-radius:12px;background:var(--carvao);border:0;
   display:grid;place-items:center;cursor:pointer}
 .cesto svg{width:19px;height:19px;stroke:#fff;fill:none;stroke-width:1.9}
 .cesto b{position:absolute;top:-5px;right:-5px;background:var(--ambar);color:var(--preto);font-size:11px;
   font-weight:700;min-width:19px;height:19px;border-radius:10px;display:grid;place-items:center;padding:0 4px}
 .cesto b:empty,.cesto b.zero{display:none}
-.busca{margin-top:13px;display:flex;align-items:center;gap:9px;background:var(--carvao);border-radius:13px;padding:12px 14px}
+.busca{margin-top:11px;display:flex;align-items:center;gap:9px;background:var(--carvao);border-radius:12px;padding:10px 13px}
 .busca svg{width:17px;height:17px;stroke:var(--cinza);fill:none;stroke-width:2;flex:none}
-.busca input{flex:1;background:none;border:0;color:#fff;font-family:var(--sans);font-size:14.5px;outline:none}
+.busca input{flex:1;background:none;border:0;color:#fff;font-family:var(--sans);font-size:14px;outline:none}
 .busca input::placeholder{color:#6E6A62}
 
-/* ---------- BANNER ---------- */
-.banner{margin:14px 16px 0;background:linear-gradient(120deg,var(--grafite),var(--preto) 72%);
-  border-radius:18px;padding:22px 20px;position:relative;overflow:hidden}
-.banner::after{content:'';position:absolute;width:210px;height:210px;right:-80px;top:-70px;border-radius:50%;
-  background:radial-gradient(circle,rgba(245,166,35,.28),transparent 68%)}
-.banner .ola{font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--ambar);position:relative}
-.banner h1{font-family:var(--display);font-size:34px;line-height:.98;color:#fff;margin-top:9px;position:relative;letter-spacing:.02em}
-.banner h1 span{color:var(--ambar)}
-.banner p{color:#A9A49B;font-size:13px;margin-top:9px;max-width:78%;position:relative}
+/* ---------- VITRINA DE VIDEO ---------- */
+.vitrina{display:grid;grid-template-columns:1fr 1fr;gap:11px;padding:14px 16px 0}
+.vitr{position:relative;aspect-ratio:1/1;border-radius:18px;overflow:hidden;border:0;padding:0;
+  background:#141412;cursor:pointer;display:block;width:100%;text-align:left;
+  box-shadow:0 6px 20px rgba(15,15,13,.16)}
+.vitr video,.vitr img.cap{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.vitr video{opacity:0;transition:opacity .5s}
+.vitr video.pronto{opacity:1}
+.vitr::after{content:'';position:absolute;inset:0;
+  background:linear-gradient(to top,rgba(10,10,9,.92) 0%,rgba(10,10,9,.45) 34%,transparent 62%)}
+.vitr .tag{position:absolute;top:10px;left:10px;z-index:3;font-size:9px;font-weight:700;
+  letter-spacing:.09em;text-transform:uppercase;padding:5px 9px;border-radius:7px}
+.vitr .txt{position:absolute;left:12px;right:12px;bottom:11px;z-index:3}
+.vitr .txt>span{display:block}
+.vitr .tit{font-family:var(--display);font-size:21px;color:#fff;letter-spacing:.02em;line-height:1.0}
+.vitr .sub{font-size:11px;color:rgba(255,255,255,.72);margin-top:3px;line-height:1.3}
+.vitr .val{font-family:var(--display);font-size:19px;color:var(--ambar);margin-top:5px;letter-spacing:.02em}
+.vitr .val s{font-family:var(--sans);font-size:10.5px;color:rgba(255,255,255,.5);margin-right:5px;font-weight:500}
 
 /* ---------- CATEGORIAS ---------- */
-.cats{display:flex;gap:9px;overflow-x:auto;padding:18px 16px 4px;scrollbar-width:none;
+.cats{display:flex;gap:8px;overflow-x:auto;padding:20px 16px 2px;scrollbar-width:none;
   scroll-snap-type:x proximity;scroll-padding-left:16px}
 .cats::-webkit-scrollbar{display:none}
-.cat{flex:none;text-decoration:none;text-align:center;width:74px;scroll-snap-align:start}
-.cat i{display:grid;place-items:center;width:62px;height:62px;margin:0 auto 6px;border-radius:19px;
-  background:var(--branco);border:1px solid var(--linha);font-style:normal;
-  font-family:var(--display);font-size:23px;color:var(--preto);padding-top:3px}
-.cat span{font-size:11.5px;font-weight:600;color:#5F5A52;display:block;line-height:1.2}
-.cat:active i{background:var(--preto);color:var(--ambar);border-color:var(--preto)}
+.cat{flex:none;text-decoration:none;scroll-snap-align:start;font-size:13px;font-weight:700;
+  color:#55504A;background:var(--branco);border:1px solid var(--linha);border-radius:100px;
+  padding:9px 16px;white-space:nowrap;transition:background .15s,color .15s}
+.cat:active,.cat.on{background:var(--preto);color:var(--ambar);border-color:var(--preto)}
 
 /* ---------- SECÇÕES ---------- */
-.cab{display:flex;align-items:baseline;justify-content:space-between;padding:26px 18px 12px}
+.cab{display:flex;align-items:baseline;justify-content:space-between;padding:22px 18px 11px}
 .cab h2{font-family:var(--display);font-size:25px;letter-spacing:.025em}
 .cab em{font-style:normal;font-size:12px;color:var(--cinza);font-weight:600}
 
 /* ---------- GRELHA DE DESTAQUES ---------- */
 .grelha{display:grid;grid-template-columns:1fr 1fr;gap:13px;padding:0 16px}
 .card{background:var(--branco);border-radius:17px;overflow:hidden;border:1px solid var(--linha);
-  text-align:left;font:inherit;color:inherit;padding:0;cursor:pointer;position:relative}
-.card .foto{height:132px;background:radial-gradient(circle at 50% 45%,#fff,#EFEAE0 82%);display:grid;place-items:center}
+  text-align:left;font:inherit;color:inherit;padding:0;cursor:pointer;position:relative;
+  box-shadow:0 3px 12px rgba(15,15,13,.07)}
+.card .foto{height:132px;background:radial-gradient(circle at 50% 45%,#fff,#EFEAE0 82%);
+  display:grid;place-items:center;position:relative;overflow:hidden}
 .card .foto img{width:94%;height:94%;object-fit:contain}
+.card .foto.vid img,.card .foto.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.card .foto.vid video{opacity:0;transition:opacity .5s}
+.card .foto.vid video.pronto{opacity:1}
 .card .corpo{padding:11px 12px 13px}
 .card .nome{font-weight:700;font-size:14px;line-height:1.22}
 .card .desc{font-size:11.5px;color:var(--cinza);margin-top:4px;line-height:1.35;
@@ -91,22 +104,17 @@ img{display:block;max-width:100%}
 .marca3d{position:absolute;top:9px;right:9px;z-index:2;background:rgba(15,15,13,.9);color:var(--ambar);
   font-size:9px;font-weight:700;letter-spacing:.09em;padding:4px 7px;border-radius:6px}
 
-/* ---------- PROMOÇÃO ---------- */
-.promo{margin:22px 16px 0;background:linear-gradient(110deg,var(--brasa),#A8321A);border-radius:18px;
-  padding:20px;color:#fff;display:flex;align-items:center;gap:14px;position:relative;overflow:hidden}
-.promo::after{content:'';position:absolute;width:150px;height:150px;right:-50px;bottom:-70px;border-radius:50%;
-  background:rgba(255,255,255,.11)}
-.promo .num{font-family:var(--display);font-size:44px;line-height:.82;color:var(--ambar-cl);flex:none}
-.promo h3{font-family:var(--display);font-size:21px;letter-spacing:.02em}
-.promo p{font-size:12px;color:rgba(255,255,255,.86);margin-top:3px}
-
 /* ---------- LISTA ---------- */
 .lista-sec{padding:0 16px}
 .linha{display:flex;gap:13px;align-items:center;padding:15px 0;border-bottom:1px solid var(--linha);
   width:100%;text-align:left;background:none;border-left:0;border-right:0;border-top:0;font:inherit;color:inherit}
+.linha[role="button"]{cursor:pointer}
 .linha .mini{width:74px;height:74px;flex:none;border-radius:14px;background:radial-gradient(circle at 50% 45%,#fff,#EFEAE0 82%);
   border:1px solid var(--linha);display:grid;place-items:center;position:relative;overflow:hidden}
 .linha .mini img{width:92%;height:92%;object-fit:contain}
+.linha .mini.vid img,.linha .mini.vid video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.linha .mini.vid video{opacity:0;transition:opacity .5s}
+.linha .mini.vid video.pronto{opacity:1}
 .linha .mini u{position:absolute;bottom:3px;right:3px;background:var(--preto);color:var(--ambar);
   font-size:8px;font-weight:700;letter-spacing:.07em;padding:2px 5px;border-radius:4px;text-decoration:none}
 .linha .info{flex:1;min-width:0}
@@ -123,8 +131,10 @@ img{display:block;max-width:100%}
 .sheet.open{transform:translateY(0);visibility:visible}
 @media (prefers-reduced-motion:reduce){.sheet{transition:none}}
 .palco{flex:1;min-height:0;background:radial-gradient(circle at 50% 42%,#fff,#EDE8DE 82%);position:relative}
+.palco.escuro{background:#141412}
 #palco{position:absolute;inset:0}
 .palco model-viewer{width:100%;height:100%;background:transparent}
+.palcovid{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;background:#141412}
 .fechar{position:absolute;top:15px;left:15px;z-index:5;width:40px;height:40px;border-radius:13px;
   border:0;background:rgba(15,15,13,.9);color:#fff;font-size:19px;line-height:1;cursor:pointer}
 .girar{position:absolute;top:22px;right:16px;z-index:5;font-size:11px;color:#6F6A62;
@@ -135,6 +145,7 @@ img{display:block;max-width:100%}
 .ficha .desc{font-size:14px;color:#6B665E;margin-top:8px}
 .ficha .preco{font-size:30px;margin-top:14px}
 .botoes{display:flex;gap:10px;margin-top:16px}
+.botoes button[style*="none"] ~ .add{flex:1}
 button.ar,button.add{flex:1;border:0;border-radius:14px;padding:16px 12px;font-family:var(--sans);
   font-size:14.5px;font-weight:700;cursor:pointer}
 button.ar{background:var(--preto);color:#fff}
@@ -211,24 +222,12 @@ footer b{color:#241F1A}
     </div>
   </div>
 
-  <div class="banner">
-    <div class="ola">Novo nesta casa</div>
-    <h1>Veja o prato<br><span>antes de pedir</span></h1>
-    <p>Toque nos pratos com a marca 3D e ponha-os na sua mesa em tamanho real.</p>
-  </div>
+  <div class="vitrina" id="vitrina"></div>
 
   <div class="cats" id="cats"></div>
 
   <div class="cab"><h2>Os mais pedidos</h2><em id="nDest"></em></div>
   <div class="grelha" id="grelha"></div>
-
-  <div class="promo">
-    <div class="num">-19%</div>
-    <div>
-      <h3>Tábua de petiscos</h3>
-      <p>Só esta semana, para partilhar à mesa</p>
-    </div>
-  </div>
 
   <div id="seccoes"></div>
 
@@ -239,7 +238,7 @@ footer b{color:#241F1A}
 </div>
 
 <div class="sheet" id="sheet" role="dialog" aria-modal="true">
-  <div class="palco">
+  <div class="palco" id="palcoBox">
     <button class="fechar" id="btFechar" aria-label="Fechar">&times;</button>
     <span class="girar">arraste para rodar</span>
     <div id="palco"></div>
@@ -254,7 +253,7 @@ footer b{color:#241F1A}
       <button class="add" id="btAdd">Adicionar</button>
     </div>
     <div class="aviso" id="dAviso"></div>
-    <div class="aviso" style="margin-top:2px">Em AR: aponte para a mesa e mova o telemóvel devagar até o prato assentar.</div>
+    <div class="aviso" id="notaAr" style="margin-top:2px">Em AR: aponte para a mesa e mova o telemóvel devagar até o prato assentar.</div>
   </div>
 </div>
 
@@ -310,13 +309,14 @@ footer b{color:#241F1A}
 /* ============ CONFIGURAÇÃO — mude só este bloco por restaurante ============ */
 const CASA     = "Casa do Índico";
 const TAGLINE  = "grelhados & petiscos";
-const WHATSAPP = "258840000000";   // sem + nem espaços
+const WHATSAPP = "258823881414";   // sem + nem espaços
 const EMOLA    = "https://emolaapp.mmola.co.mz/qr?v=1&d=00020101021153039435802MZ62500803P2P02098762812000926AHMAD%20ZEINUL%20ABEDINE%20AHMED63043CC2";
 // deixe EMOLA = "" para tirar a opção de pagar já
 /* ==========================================================================
    Etiquetas:   t:["top"] mais vendido · t:["rec"] recomendado
    Promoção:    ant: <preço antigo>
    Com 3D:      m:"x.glb", f:"x.webp"
+   Com vídeo:   vid:"x.mp4", f:"x.webp"   (tem de existir tambem x.webm)
    ========================================================================== */
 
 const CATS = [
@@ -334,12 +334,16 @@ const MENU = {
      t:["top"], m:"frango.glb", u:"frango.usdz", f:"frango.webp"},
     {n:"Prato da Casa", d:"Carnes grelhadas variadas com arroz, feijão e salada fresca", p:950,
      t:["rec"], m:"prato-casa.glb", u:"prato-casa.usdz", f:"prato-casa.webp"},
+    {n:"Asas Picantes", d:"Doze asas marinadas em piri-piri, grelhadas na brasa", p:620,
+     t:["top"], vid:"asas.mp4", f:"asas.webp"},
     {n:"Espetada de Novilho", d:"Duas espetadas com arroz e salada", p:890},
     {n:"Costeleta de Porco", d:"Grelhada em lenha, com puré e legumes", p:680}
   ],
   petiscos: [
     {n:"Tábua de Petiscos", d:"Espetada de queijo e tomate, azeitonas, pão torrado e fruta da época", p:650, ant:800,
      m:"tabua.glb", u:"tabua.usdz", f:"tabua.webp"},
+    {n:"Sandes da Casa", d:"Frango panado, molho da casa, milho e batata frita", p:480, ant:590,
+     vid:"sandes-alta.mp4", f:"sandes-alta.webp"},
     {n:"Rissóis de Camarão", d:"Seis unidades, fritos na hora", p:350, t:["top"]},
     {n:"Pastéis de Bacalhau", d:"Quatro unidades, com limão", p:320}
   ],
@@ -364,11 +368,17 @@ const MENU = {
   ]
 };
 
+/* os dois quadrados do topo: categoria, indice do prato, etiqueta, legenda, video */
+const VITRINA = [
+  {c:"grelhados", i:2, tag:"Destaque do dia", sub:"Sai da brasa a toda a hora", vid:"asas.mp4",   f:"asas.webp",   cor:"b-top"},
+  {c:"petiscos",  i:1, tag:"Promoção",        sub:"Só esta semana",            vid:"sandes.mp4", f:"sandes.webp", cor:"b-pro"}
+];
+
 const mt = v => v.toLocaleString('pt-PT') + " MT";
 document.getElementById('nomeCasa').textContent = CASA;
 const MESA_URL = new URLSearchParams(location.search).get('mesa');
 document.getElementById('tagCasa').textContent =
-  MESA_URL ? TAGLINE + " · mesa " + MESA_URL : TAGLINE + " · entregas e take-away";
+  MESA_URL ? TAGLINE + " · mesa " + MESA_URL : TAGLINE;
 document.title = "Menu — " + CASA;
 
 const rot = {top:"mais vendido", rec:"recomendado", pro:"promoção"};
@@ -377,24 +387,39 @@ const tipos = p => { const t=[...(p.t||[])]; if (p.ant) t.unshift("pro"); return
 const preco = p => p.ant ? `<s>${mt(p.ant)}</s>${mt(p.p)}` : mt(p.p);
 const etis  = p => tipos(p).map(t => `<span class="eti ${cls[t]}">${rot[t]}</span>`).join('');
 
+/* vitrina */
+document.getElementById('vitrina').innerHTML = VITRINA.map(v => {
+  const p = MENU[v.c][v.i];
+  return `<button class="vitr" data-c="${v.c}" data-i="${v.i}">
+    <img class="cap" src="${v.f}" alt="${p.n}">
+    <video poster="${v.f}" muted loop playsinline autoplay preload="auto"><source src="${v.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${v.vid}" type="video/mp4"></video>
+    <span class="tag ${v.cor}">${v.tag}</span>
+    <span class="txt">
+      <span class="tit">${p.n}</span>
+      <span class="sub">${v.sub}</span>
+      <span class="val">${preco(p)}</span>
+    </span></button>`;
+}).join('');
+
 /* categorias */
 document.getElementById('cats').innerHTML = CATS.map(c =>
-  `<a class="cat" href="#sec-${c.id}"><i>${c.i}</i><span>${c.n}</span></a>`).join('');
+  `<a class="cat" href="#sec-${c.id}">${c.n}</a>`).join('');
 
 /* destaques */
 const dest = [];
 for (const [c, ps] of Object.entries(MENU))
-  ps.forEach((p,i) => { if (p.m || p.ant || (p.t||[]).includes('top')) dest.push({c,i,p}); });
-dest.sort((a,b) => (b.p.m?1:0)-(a.p.m?1:0));
+  ps.forEach((p,i) => { if (p.m || p.vid || p.ant || (p.t||[]).includes('top')) dest.push({c,i,p}); });
+dest.sort((a,b) => ((b.p.vid?2:0)+(b.p.m?1:0)) - ((a.p.vid?2:0)+(a.p.m?1:0)));
 document.getElementById('nDest').textContent = dest.length + " pratos";
 document.getElementById('grelha').innerHTML = dest.slice(0,6).map(({c,i,p}) => {
   const t = tipos(p)[0];
   return `<div class="card">
     ${t ? `<span class="badge ${cls[t]}">${rot[t]}</span>` : ''}
-    ${p.m ? `<span class="marca3d">3D</span>` : ''}
-    <div class="foto" data-c="${c}" data-i="${i}" role="button" tabindex="0">
-      ${p.f ? `<img src="${p.f}" alt="${p.n}" loading="lazy">`
-            : `<span style="font-family:var(--display);font-size:44px;color:#DCD5C7">${p.n.charAt(0)}</span>`}
+    ${p.m ? `<span class="marca3d">3D</span>` : p.vid ? `<span class="marca3d">v&iacute;deo</span>` : ''}
+    <div class="foto${p.vid ? ' vid' : ''}" data-c="${c}" data-i="${i}" role="button" tabindex="0">
+      ${p.vid ? `<img src="${p.f}" alt="${p.n}"><video poster="${p.f}" muted loop playsinline autoplay preload="auto"><source src="${p.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${p.vid}" type="video/mp4"></video>`
+        : p.f ? `<img src="${p.f}" alt="${p.n}" loading="lazy">`
+              : `<span style="font-family:var(--display);font-size:44px;color:#DCD5C7">${p.n.charAt(0)}</span>`}
     </div>
     <div class="corpo" data-c="${c}" data-i="${i}">
       <div class="nome">${p.n}</div>
@@ -410,8 +435,9 @@ document.getElementById('grelha').innerHTML = dest.slice(0,6).map(({c,i,p}) => {
 document.getElementById('seccoes').innerHTML = CATS.map(c => `
   <div class="cab" id="sec-${c.id}"><h2>${c.n}</h2><em>${MENU[c.id].length} pratos</em></div>
   <div class="lista-sec">${MENU[c.id].map((p,i) => `
-    <${p.m ? 'button' : 'div'} class="linha" ${p.m ? `data-c="${c.id}" data-i="${i}"` : ''}>
-      ${p.f ? `<span class="mini"><img src="${p.f}" alt="${p.n}" loading="lazy"><u>3D</u></span>` : ''}
+    <div class="linha" ${(p.m||p.vid) ? `data-c="${c.id}" data-i="${i}" role="button" tabindex="0"` : ''}>
+      ${p.vid ? `<span class="mini vid"><img src="${p.f}" alt="${p.n}"><video poster="${p.f}" muted loop playsinline autoplay preload="auto"><source src="${p.vid.replace(".mp4",".webm")}" type="video/webm"><source src="${p.vid}" type="video/mp4"></video><u>v&iacute;deo</u></span>`
+        : p.f ? `<span class="mini"><img src="${p.f}" alt="${p.n}" loading="lazy"><u>3D</u></span>` : ''}
       <span class="info">
         <span class="nome">${p.n}</span>
         <span class="desc">${p.d}</span>
@@ -421,7 +447,7 @@ document.getElementById('seccoes').innerHTML = CATS.map(c => `
         <span class="preco">${preco(p)}</span>
         <button class="mais" data-add-c="${c.id}" data-add-i="${i}" aria-label="Adicionar">+</button>
       </span>
-    </${p.m ? 'button' : 'div'}>`).join('')}</div>`).join('');
+    </div>`).join('')}</div>`).join('');
 
 /* detalhe */
 const sheet = document.getElementById('sheet'), palco = document.getElementById('palco');
@@ -433,7 +459,25 @@ function abrir(p){
   document.getElementById('dEti').innerHTML    = etis(p);
   document.getElementById('dPreco').innerHTML  = preco(p);
   document.getElementById('dAviso').textContent = '';
-  const bt = document.getElementById('btAr'); bt.disabled = true;
+  const bt = document.getElementById('btAr');
+  const gira = document.querySelector('.girar');
+
+  if (!p.m && p.vid) {                       // prato so com video
+    bt.style.display = 'none';
+    gira.style.display = 'none';
+    document.getElementById('notaAr').style.display = 'none';
+    document.getElementById('palcoBox').classList.add('escuro');
+    palco.innerHTML = `<video class="palcovid" poster="${p.f}" muted loop playsinline autoplay preload="auto">
+      <source src="${p.vid.replace(".mp4",".webm")}" type="video/webm">
+      <source src="${p.vid}" type="video/mp4"></video>`;
+    sheet.classList.add('open'); document.body.style.overflow = 'hidden';
+    ligarVideos();
+    return;
+  }
+  bt.style.display = ''; gira.style.display = '';
+  document.getElementById('notaAr').style.display = '';
+  document.getElementById('palcoBox').classList.remove('escuro');
+  bt.disabled = true;
   palco.innerHTML = `<model-viewer id="mv" src="${p.m}" alt="${p.n}" ar
     ${p.u ? `ios-src="${p.u}"` : ''}
     ar-modes="scene-viewer webxr quick-look" ar-scale="fixed" ar-placement="floor"
@@ -479,7 +523,7 @@ document.addEventListener('click', e => {
   const add = e.target.closest('[data-add-c]');
   if (add){ e.stopPropagation(); pedido.push(MENU[add.dataset.addC][+add.dataset.addI]); atualizar(); return; }
   const ab = e.target.closest('[data-c]');
-  if (ab){ const p = MENU[ab.dataset.c][+ab.dataset.i]; if (p.m) abrir(p); }
+  if (ab){ const p = MENU[ab.dataset.c][+ab.dataset.i]; if (p.m || p.vid) abrir(p); }
 });
 
 const modal = document.getElementById('modal');
@@ -555,6 +599,33 @@ document.getElementById('btEnviar').addEventListener('click', () => {
   window.open(`https://wa.me/${WHATSAPP}?text=${encodeURIComponent(texto)}`, '_blank');
   mostrarPasso2(pedido.reduce((s,p)=>s+p.p,0));
 });
+
+/* videos: a imagem fica ate o video estar pronto, depois entra suave */
+function ligarVideos(){
+  document.querySelectorAll('video[preload="auto"]').forEach(v => {
+    const pronto = () => v.classList.add('pronto');
+    if (v.readyState >= 3) pronto();
+    else v.addEventListener('canplay', pronto, {once:true});
+    const tenta = () => { const pr = v.play(); if (pr) pr.catch(()=>{}); };
+    tenta();
+    v.addEventListener('loadeddata', tenta, {once:true});
+  });
+}
+ligarVideos();
+document.addEventListener('visibilitychange', () => {
+  if (!document.hidden) ligarVideos();
+});
+
+/* categoria activa conforme a rolagem */
+const secs = CATS.map(c => document.getElementById('sec-' + c.id)).filter(Boolean);
+const chips = [...document.querySelectorAll('.cat')];
+const marcar = () => {
+  let act = 0;
+  secs.forEach((el,i) => { if (el.getBoundingClientRect().top <= 150) act = i; });
+  chips.forEach((ch,i) => ch.classList.toggle('on', i === act));
+};
+addEventListener('scroll', marcar, {passive:true}); marcar();
+
 atualizar();
 </script>
 
@@ -570,7 +641,10 @@ atualizar();
 (async () => {
   const precisa = ["model-viewer.min.js","frango.glb","prato-casa.glb","tabua.glb",
                    "frango.webp","prato-casa.webp","tabua.webp",
-                   "frango.usdz","prato-casa.usdz","tabua.usdz"];
+                   "frango.usdz","prato-casa.usdz","tabua.usdz",
+                   "asas.mp4","sandes.mp4","sandes-alta.mp4",
+                   "asas.webm","sandes.webm","sandes-alta.webm",
+                   "asas.webp","sandes.webp","sandes-alta.webp"];
   const falta = [];
   for (const f of precisa) {
     try { const r = await fetch(f, {method:"HEAD"}); if (!r.ok) falta.push(f + " (" + r.status + ")"); }
